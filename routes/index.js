@@ -46,7 +46,12 @@ router.post("/places", (req, res) => {
 router.get("/places/:nickname", (req, res) => {
   Marker.find({ nickname: req.params.nickname }).then((data) => {
     if (data) {
-      res.json({ result: true, places: data });
+      let test = [];
+      for(let i=0;i<data.length;i++){
+          let obj ={ nickname: data[i].nickname, name: data[i].name, latitude: data[i].latitude, longitude: data[0].longitude };
+          test.push(obj);
+      }
+      res.json({ result: true, places: test });
     } else {
       res.json({ result: false });
     }
